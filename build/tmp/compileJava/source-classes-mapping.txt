@@ -1,0 +1,17 @@
+recognition/Voice.java
+ recognition.Voice
+ recognition.Voice$1
+recognition/Word.java
+ recognition.Word
+recognition/Result.java
+ recognition.Result
+recognition/RecognizeService.java
+ recognition.RecognizeService
+recognition/Main.java
+ recognition.Main
+recognition/RestApi.java
+ recognition.RestApi
+recognition/RecognizeController.java
+ recognition.RecognizeController
+recognition/PartialResult.java
+ recognition.PartialResult

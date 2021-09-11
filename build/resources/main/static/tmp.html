@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+  <h1>Welcome to my project</h1>
+  <!-- <input type="button" id="startbtn" value="Start">
+  <input type="button" id="stopbtn" value="stop" disabled=true>
+  <h3 id="expression"></h3> -->
+  <button class="btn" id="mic" style="position: absolute; right: 1%; bottom: 1%; width: 15%;"><i class="material-icons">mic</i></button>
+  <div id="recognition-page" style="display: none;
+  position: fixed;
+  bottom: 1%;
+  right: 1%;
+  border: 3px solid #000000;
+  z-index: 9;
+  height: 50%;
+  width: 15%;">
+
+    <i class="material-icons" id="close" style="float: right; cursor: pointer;">close</i>
+    <h3 id="countdown"></h3>
+    <p id="recognition-text"></p>
+    <button class="btn" id="retry" style="position: absolute; bottom: 0%; width: 100%;">Retry</button>
+  </div>
+  
+  
+  <script src="js/WebAudioRecorder.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- <script>
+    let start = document.getElementById("start");
+    let restart = document.getElementById("restart");
+    let expression = document.getElementById("expression");
+
+    const audioRecorder = new WebAudioRecorder() -->
+
+    <!-- // start.addEventListener("click", function() {
+    //   start.disabled = true;
+    //   (async () => {
+    //     const xhttp = new XMLHttpRequest();
+    //     xhttp.open("GET", "http://localhost:8080/recognizer", false);
+    //     xhttp.send();
+    //     expression.innerHTML = xhttp.responseText;
+    //   }) ();
+    // });
+
+    // restart.addEventListener("click", function() {
+    //   start.disabled = false;
+    // });
+
+    // const recordAudio = () => {
+    //   return new Promise(resolve => {
+    //     navigator.mediaDevices.getUserMedia({ audio: true })
+    //       .then(stream => {
+    //         const mediaRecorder = new MediaRecorder(stream);
+    //         const audioChunks = [];
+
+    //         mediaRecorder.addEventListener("dataavailable", event => {
+    //           audioChunks.push(event.data);
+    //         });
+
+    //         const start = () => {
+    //           mediaRecorder.start();
+    //         };
+
+    //         const stop = () => {
+    //           return new Promise(resolve => {
+    //             mediaRecorder.addEventListener("stop", () => {
+    //               const audioBlob = new Blob(audioChunks);
+    //               const audioUrl = URL.createObjectURL(audioBlob);
+    //               const audio = new Audio(audioUrl);
+    //               const play = () => {
+    //                 audio.play();
+    //               };
+
+    //               resolve({ audioBlob, audioUrl, play });
+    //             });
+
+    //             mediaRecorder.stop();
+    //           });
+    //         };
+
+    //         resolve({ start, stop });
+    //       });
+    //   });
+    // };
+
+    // (async () => {
+
+    //   const recorder = await recordAudio();
+    //   startBtn.addEventListener("click", function() {
+    //     recorder.start();
+    //     setTimeout(async () => {
+    //       const audio = await recorder.stop();
+    //       audio.play();
+    //     }, 3000);
+    //   });
+
+    // }) ();
+
+    // record.addEventListener("click", function() {
+    //   navigator.mediaDevices.getUserMedia({audio: true})
+    //   .then(stream => {
+    //     const mediaRecorder = new MediaRecorder(stream);
+    //     MediaRecorder.isTypeSupported("audio/wav;codecs=MS_PCM");
+    //     mediaRecorder.start();
+
+    //     const audioChunk = [];
+
+    //     mediaRecorder.addEventListener("dataavailable", event => {
+    //       audioChunk.push(event.data);
+    //     });
+
+    //     mediaRecorder.addEventListener("stop", event => {
+    //       const audioBlob = new Blob(audioChunk, {type: 'audio/wav'});
+    //       const audioUrl = URL.createObjectURL(audioBlob);
+    //       const audio = new Audio(audioUrl);
+
+    //       const reader = new window.FileReader();
+    //       reader.readAsDataURL(audioBlob);
+    //       reader.onloadend = () => {
+    //         let base64 = reader.result;
+    //         const xhttp = new XMLHttpRequest();
+    //         xhttp.open("POST", "http://localhost:8080/test", false);
+    //         xhttp.setRequestHeader("Content-type", "text/html")
+    //         xhttp.send(base64);
+    //         result.setAttribute("value", MediaRecorder.isTypeSupported("audio/webm"));
+    //         audio.play();
+    //       }
+    //     });
+
+    //     setTimeout(() => {
+    //       mediaRecorder.stop();
+    //     }, 5000);
+    //   });
+    // }); -->
+
+  <!-- </script> -->
+</body>
+</html>
+
+
+<!-- <script>
+  let audioIN = { audio: true };
+//  audio is true, for recording
+
+// Access the permission for use
+// the microphone
+navigator.mediaDevices.getUserMedia(audioIN)
+
+// 'then()' method returns a Promise
+.then(function (mediaStreamObj) {
+
+  // Connect the media stream to the
+  // first audio element
+  let audio = document.querySelector('audio');
+  //returns the recorded audio via 'audio' tag
+
+  // 'srcObject' is a property which
+  // takes the media object
+  // This is supported in the newer browsers
+  if ("srcObject" in audio) {
+    audio.srcObject = mediaStreamObj;
+  }
+  else {   // Old version
+    audio.src = window.URL
+      .createObjectURL(mediaStreamObj);
+  }
+
+  // It will play the audio
+  audio.onloadedmetadata = function (ev) {
+
+    // Play the audio in the 2nd audio
+    // element what is being recorded
+    audio.play();
+  };
+
+  // Start record
+  let start = document.getElementById('btnStart');
+
+  // Stop record
+  let stop = document.getElementById('btnStop');
+
+  // 2nd audio tag for play the audio
+  let playAudio = document.getElementById('adioPlay');
+
+  // This is the main thing to recorde
+  // the audio 'MediaRecorder' API
+  let mediaRecorder = new MediaRecorder(mediaStreamObj);
+  // Pass the audio stream
+
+  // Start event
+  start.addEventListener('click', function (ev) {
+    mediaRecorder.start();
+    // console.log(mediaRecorder.state);
+  })
+
+  // Stop event
+  stop.addEventListener('click', function (ev) {
+    mediaRecorder.stop();
+    // console.log(mediaRecorder.state);
+  });
+
+  // If audio data available then push
+  // it to the chunk array
+  mediaRecorder.ondataavailable = function (ev) {
+    dataArray.push(ev.data);
+  }
+
+  // Chunk array to store the audio data
+  let dataArray = [];
+
+  // Convert the audio data in to blob
+  // after stopping the recording
+  mediaRecorder.onstop = function (ev) {
+
+    // blob of type mp3
+    let audioData = new Blob(dataArray,
+              { 'type': 'audio/mp3;' });
+
+    // After fill up the chunk
+    // array make it empty
+    dataArray = [];
+
+    // Creating audio url with reference
+    // of created blob named 'audioData'
+    let audioSrc = window.URL
+        .createObjectURL(audioData);
+
+    // Pass the audio url to the 2nd video tag
+    playAudio.src = audioSrc;
+  }
+})
+
+// If any error occurs then handles the error
+.catch(function (err) {
+  console.log(err.name, err.message);
+});
+</script> -->
+
+
+<!-- <header>
+    <h1>Record and Play Audio in JavaScript</h1>
+</header> -->
+<!-- button for 'start recording'-->
+<!-- <p>
+    <button id="btnStart">START RECORDING</button>
+
+    <button id="btnStop">STOP RECORDING</button> -->
+    <!-- button for 'stop recording' -->
+<!-- </p> -->
+
+<!-- for record-->
+<!-- <audio controls></audio> -->
+<!--'controls' use for add
+  play, pause, and volume-->
+
+<!--for play the audio-->
+<!-- <audio id="adioPlay" controls></audio>
